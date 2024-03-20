@@ -20,8 +20,9 @@ jobs:
         include:
           - os: ubuntu-22.04
             arch: x86_64
-          # - os: ubuntu-22.04
-          #   arch: i686
+            build-sdist: true
+          - os: ubuntu-22.04
+            arch: i686
           # - os: ubuntu-22.04
           #   arch: aarch64
           # - os: macos-12
@@ -76,14 +77,13 @@ jobs:
         with:
           name: python-package-distributions-${{ matrix.os }}-${{ matrix.arch }}
           path: dist/*.whl
-
-  build-sdist:
-    runs-on: ubuntu-latest
-    steps:
+      
       - name: Build Sdist
+        if: ${{ matrix.build-sdist }}
         run: pipx run build --sdist
       
       - name: Store the source distribution package
+        if: ${{ matrix.build-sdist }}
         uses: actions/upload-artifact@v4
         with:
           name: python-package-distributions-source
