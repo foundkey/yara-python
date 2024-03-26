@@ -69,7 +69,7 @@ jobs:
           CIBW_BUILD_FRONTEND: build
           CIBW_ENVIRONMENT: ${{ matrix.env }}
           CIBW_SKIP: cp36-*
-          CIBW_TEST_SKIP: *-macosx_universal2:arm64
+          CIBW_TEST_SKIP: "*-macosx_universal2:arm64"
           CIBW_TEST_COMMAND: python {package}/tests.py
 
       - name: Store the distribution packages
